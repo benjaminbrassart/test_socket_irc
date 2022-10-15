@@ -6,7 +6,7 @@
 #    By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 15:09:51 by bbrassar          #+#    #+#              #
-#    Updated: 2022/10/15 18:25:11 by bbrassar         ###   ########.fr        #
+#    Updated: 2022/10/15 21:33:20 by bbrassar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC += main.c
 SRC += server/server_init.c
 SRC += server/server_start.c
 SRC += server/server_delete.c
+SRC += server/server_loop.c
 SRC += server/server_add_client.c
 SRC += server/server_remove_client.c
 SRC += client/client_new.c

@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_init.c                                      :+:      :+:    :+:   */
+/*   get_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 16:26:14 by bbrassar          #+#    #+#             */
-/*   Updated: 2022/10/15 21:32:29 by bbrassar         ###   ########.fr       */
+/*   Created: 2022/10/15 21:16:52 by bbrassar          #+#    #+#             */
+/*   Updated: 2022/10/15 21:19:58 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "irc.h"
 
-#include <stdio.h>
-#include <signal.h>
+#include <string.h>
 
-static void _handle_sig(int sig);
+struct command* get_command(char const* command_name) {
+    size_t i;
 
-void server_init(void)
-{
-    unsigned char* dst;
-    size_t n;
-
-    dst = (unsigned char*)SERVER;
-    n = 0;
-    while (n < sizeof (*SERVER))
-        dst[n++] = 0;
-    signal(SIGINT, _handle_sig);
-}
-
-static void _handle_sig(int sig)
-{
-    signal(sig, SIG_DFL);
-    SERVER->running = 0;
+    i = 0;
+    while (i < (sizeof (COMMANDS) / sizeof (*COMMANDS))) {
+        if (strcmp(COMMANDS[i].label, command_name) == 0)
+            return &COMMANDS[i];
+        ++i;
+    }
+    return NULL;
 }

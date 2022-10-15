@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_init.c                                      :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbrassar <bbrassar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 16:26:14 by bbrassar          #+#    #+#             */
-/*   Updated: 2022/10/15 21:32:29 by bbrassar         ###   ########.fr       */
+/*   Created: 2022/10/15 22:42:27 by bbrassar          #+#    #+#             */
+/*   Updated: 2022/10/15 22:43:25 by bbrassar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "irc.h"
+#ifndef CONFIG_H
+# define CONFIG_H
 
-#include <stdio.h>
-#include <signal.h>
+# undef FT_IRC_BUILD_DATE
+# undef FT_IRC_VERSION
 
-static void _handle_sig(int sig);
+# define FT_IRC_BUILD_DATE __DATE__ " " __TIME__
+# define FT_IRC_VERSION "1.0.0"
 
-void server_init(void)
-{
-    unsigned char* dst;
-    size_t n;
-
-    dst = (unsigned char*)SERVER;
-    n = 0;
-    while (n < sizeof (*SERVER))
-        dst[n++] = 0;
-    signal(SIGINT, _handle_sig);
-}
-
-static void _handle_sig(int sig)
-{
-    signal(sig, SIG_DFL);
-    SERVER->running = 0;
-}
+#endif
